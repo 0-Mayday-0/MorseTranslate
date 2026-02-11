@@ -60,10 +60,10 @@ class Translator:
         current_character: list[str] = []
 
         for i, v in enumerate(self.morse):
-            if v is not '/' and v is not ' ':
+            if v != '/' and v != ' ':
                 current_character.append(v)
 
-            elif v is ' ':
+            elif v == ' ':
                 parsed.append(''.join(current_character))
                 parsed.append(v)
                 current_character.clear()
@@ -81,7 +81,13 @@ class Translator:
 
 
     def to_alpha(self) -> str:
-        return ''.join([self._morse_to_alpha[k].to_alpha for k in self.parse_morse()])
+        try:
+            return ''.join([self._morse_to_alpha[k].to_alpha for k in self.parse_morse()])
+
+        except KeyError as e:
+            print(f"ERROR: Invalid character '{e.args[0]}'")
+            return ''
+
 
     def to_morse(self) -> str:
         raise NotImplementedError

@@ -72,9 +72,6 @@ class Translator:
                 parsed.append(''.join(current_character))
                 current_character.clear()
 
-        ic(current_character)
-
-
         parsed.append(''.join(current_character))
 
         return parsed
@@ -90,13 +87,18 @@ class Translator:
 
 
     def to_morse(self) -> str:
-        raise NotImplementedError
+        try:
+            return ''.join([f'{self._alpha_to_morse[k.upper()].to_morse}/' for k in self.alpha])
+
+        except KeyError as e:
+            print(f"ERROR: Invalid character '{e.args[0]}'")
+            return ''
 
 
 def main() -> None:
-    test: Translator = Translator(morse='...././.-../.-../--- .--/---/.-./.-../-..')
+    test: Translator = Translator(alpha="Hello world")
 
-    ic(test.to_alpha())
+    ic(test.to_morse())
 
 if __name__ == '__main__':
     main()

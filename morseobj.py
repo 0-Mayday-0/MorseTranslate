@@ -49,9 +49,6 @@ class Translator:
         self._alpha_to_morse: dict[str, MorseCharacter] = {a: MorseCharacter(m, a) for a, m in zip(self._alpha, self._morse)}
         self._morse_to_alpha: dict[str, MorseCharacter] = {m: MorseCharacter(m, a) for a, m in zip(self._alpha, self._morse)}
 
-        ic(self._alpha_to_morse)
-        ic(self._morse_to_alpha)
-
         self.morse = morse
         self.alpha = alpha
 
